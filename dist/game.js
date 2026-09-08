@@ -93,7 +93,6 @@ function render(){
   const scene=ending||nodes[path];
   $('game').classList.toggle('ending',!!ending);
   $('scene').className='scene '+scene.mood;
-  $('reaction').textContent=scene.voice;
   $('caption').textContent=ending?scene.genre:scene.caption;
   $('speaker').textContent=ending
     ?'おはなし '+(parseInt(path,2)+1).toString().padStart(2,'0')+' / '+TOTAL_ENDINGS
@@ -137,7 +136,6 @@ function choose(index){
   finishText();
   $('speaker').textContent='はちわれ';
   $('line').textContent=nodes[path].choices[index]+'…ってコト⁉︎';
-  $('reaction').textContent='…ってコト⁉︎';
   choiceSound();
   for(const element of $('choices').children)element.disabled=true;
   setTimeout(()=>{

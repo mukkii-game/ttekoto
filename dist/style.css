@@ -69,6 +69,7 @@ h1{
   line-height:1;
   font-weight:900;
   letter-spacing:-2px;
+  white-space:nowrap;
   transform:rotate(-2deg);
 }
 
@@ -112,36 +113,16 @@ h1 span{color:#427db2}
 
 .characters{
   position:absolute;
-  bottom:44px;
-  left:50%;
-  width:310px;
-  height:174px;
+  inset:0 0 36px;
   overflow:hidden;
   mix-blend-mode:multiply;
-  transform:translateX(-50%);
 }
 
 .characters img{
-  position:absolute;
-  top:-113px;
-  left:-26px;
-  width:420px;
-  max-width:none;
-}
-
-.reaction{
-  position:absolute;
-  z-index:2;
-  top:17px;
-  left:35px;
-  min-width:100px;
-  padding:11px 24px;
-  border:2px solid #3b4754;
-  border-radius:48% 45% 48% 40%;
-  background:white;
-  font-size:30px;
-  text-align:center;
-  transform:rotate(-5deg);
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
 }
 
 .scene-caption{
@@ -157,7 +138,6 @@ h1 span{color:#427db2}
 .scene.happy .characters{animation:bob .4s ease-in-out 2}
 .scene.fear{background:#dce0eb}
 .scene.fear .characters{animation:shake .13s linear 5}
-.scene.hesitant .reaction{animation:float .7s ease-in-out}
 
 .dialogue{
   position:relative;
@@ -248,15 +228,13 @@ footer{
 
 .ending .dialogue{min-height:0}
 .ending .scene{height:170px}
-.ending .characters{bottom:29px}
+.ending .characters{bottom:28px}
 .ending .scene-caption{bottom:8px}
 .ending #line{font-size:20px;line-height:1.55}
-.ending .reaction{top:9px}
 .ending .dialogue{margin-top:8px}
 
-@keyframes bob{50%{transform:translate(-50%,-8px)}}
-@keyframes shake{50%{transform:translateX(-49%)}}
-@keyframes float{50%{transform:rotate(4deg)}}
+@keyframes bob{50%{transform:translateY(-8px)}}
+@keyframes shake{50%{transform:translateX(1%)}}
 
 @media(max-height:750px){
   #game{padding-top:8px}
