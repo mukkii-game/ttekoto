@@ -112,15 +112,15 @@ function render(){
     heading.textContent=scene.title+(scene.truth?' ◎':'');
     $('line').before(heading);
     $('choices').append(
-      button('別の「ってコト⁉︎」をためす',()=>{path='';render()},true),
-      button('ひとつ前の選択に戻る',()=>{path=path.slice(0,-1);render()})
+      button('べつの「ってこと⁉︎」を ためす',()=>{path='';render()},true),
+      button('ひとつ まえの せんたくに もどる',()=>{path=path.slice(0,-1);render()})
     );
   }else{
     scene.choices.forEach((text,index)=>{
       const element=button('',()=>choose(index));
       element.append(document.createTextNode(text));
       const suffix=document.createElement('small');
-      suffix.textContent='…ってコト⁉︎';
+      suffix.textContent='…ってこと⁉︎';
       element.append(suffix);
       $('choices').append(element);
     });
@@ -135,9 +135,9 @@ function choose(index){
   if(locked)return;
   locked=true;
   finishText();
-  $('speaker').textContent='ハチワレ';
-  $('line').textContent=nodes[path].choices[index]+'…ってコト⁉︎';
-  $('reaction').textContent='…ってコト⁉︎';
+  $('speaker').textContent='はちわれ';
+  $('line').textContent=nodes[path].choices[index]+'…ってこと⁉︎';
+  $('reaction').textContent='…ってこと⁉︎';
   choiceSound();
   for(const element of $('choices').children)element.disabled=true;
   setTimeout(()=>{
@@ -146,7 +146,7 @@ function choose(index){
   },540);
 }
 
-$('sound').textContent='音 ON';
+$('sound').textContent='おと あり';
 $('sound').setAttribute('aria-pressed','true');
 document.addEventListener('click',event=>{
   audioUnlocked=true;
@@ -155,7 +155,7 @@ document.addEventListener('click',event=>{
 $('sound').onclick=()=>{
   audioUnlocked=true;
   sound=!sound;
-  $('sound').textContent='音 '+(sound?'ON':'OFF');
+  $('sound').textContent='おと '+(sound?'あり':'なし');
   $('sound').setAttribute('aria-pressed',String(sound));
   if(sound){
     tone(650,.06,0,'triangle',.03,780);
