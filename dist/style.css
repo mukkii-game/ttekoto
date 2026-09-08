@@ -1,1 +1,286 @@
-@font-face{font-family:'Chika';src:url('./assets/chika-Regular.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}*{box-sizing:border-box}body{margin:0;background:#eaf1fa;color:#29354a;font-family:'Chika','Hiragino Maru Gothic ProN','Yu Gothic',Meiryo,sans-serif}button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}button:focus-visible{outline:3px solid #ec9938;outline-offset:4px}#game{max-width:510px;min-height:100svh;margin:auto;padding:18px 24px max(18px,env(safe-area-inset-bottom));background:#fffdfb;box-shadow:0 0 70px #506b8b12}header,footer{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;color:#6b7b8d}header button,footer button{background:none;border:0;color:#536b84;padding:9px;font-size:13px}.heading{display:flex;align-items:center;justify-content:center;gap:12px;margin:12px 0 8px}h1{margin:0;font-size:37px;letter-spacing:-2px;transform:rotate(-2deg);font-weight:900}h1 span{color:#427db2}.badge{font-size:10px;letter-spacing:2px;border:1px solid #9bacc0;border-radius:4px;padding:4px;align-self:flex-end}#progress{display:flex;justify-content:center;gap:8px;margin:20px 0}.dot{width:7px;height:7px;border-radius:50%;background:#dce3ea}.dot.active{background:#608daf}.scene{position:relative;height:270px;border:1px solid #e1e8ef;border-radius:50% 45% 18px 18px;background:#f5f8fc;overflow:hidden;transition:background .6s}.characters{position:absolute;width:310px;height:174px;bottom:44px;left:50%;transform:translateX(-50%);overflow:hidden;mix-blend-mode:multiply}.characters img{position:absolute;width:420px;max-width:none;left:-26px;top:-113px}.reaction{position:absolute;z-index:2;top:17px;left:35px;padding:11px 24px;border:2px solid #3b4754;border-radius:48% 45% 48% 40%;background:white;font-size:24px;min-width:100px;text-align:center;transform:rotate(-5deg)}.scene-caption{position:absolute;bottom:13px;left:12px;right:12px;text-align:center;font-size:12px;line-height:1.6}.scene.happy .characters{animation:bob .4s ease-in-out 2}.scene.fear{background:#dce0eb}.scene.fear .characters{animation:shake .13s linear 5}.scene.hesitant .reaction{animation:float .7s ease-in-out}.dialogue{position:relative;margin:22px 0 17px;padding:0 8px;min-height:99px}.speaker{font-size:12px;font-weight:bold;color:#6086a5}#line{font-size:16px;line-height:1.9;white-space:pre-line;margin:5px 0 0}#skip{position:absolute;bottom:-7px;right:0;border:0;background:none;color:#8a9fb4;padding:8px}#choices{display:grid;gap:11px}.choice{width:100%;text-align:left;padding:15px 17px;border:1.5px solid #94abc1;border-bottom-width:4px;border-radius:14px;background:white;color:#314e6b;font-size:16px;line-height:1.5;transition:transform .12s,background .12s}.choice small{display:block;font-size:14px;color:#657f98}.choice:active{transform:translateY(2px);border-bottom-width:2px;background:#eaf2fa}.choice.primary{background:#4c7da4;color:white;border-color:#3e6789;text-align:center}.choice:disabled{opacity:.55;cursor:default}footer{margin-top:19px;border-top:1px dashed #dce3ea;padding-top:10px}.ending-title{font-size:23px;margin:4px 0 10px;font-weight:900}.ending .dialogue{min-height:0}.ending .scene{height:205px}.ending .characters{bottom:29px}.ending .scene-caption{bottom:8px}.ending #line{font-size:15px}.ending .reaction{top:9px}.ending .dialogue{margin-top:16px}@keyframes bob{50%{transform:translate(-50%,-8px)}}@keyframes shake{50%{transform:translateX(-49%)}}@keyframes float{50%{transform:rotate(4deg)}}@media(max-height:750px){#game{padding-top:9px}.heading{margin-top:5px}h1{font-size:32px}#progress{margin:12px 0}.scene{height:235px}.dialogue{margin-top:15px;min-height:86px}.choice{padding:11px 15px}footer{margin-top:12px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+@font-face{
+  font-family:'Chika';
+  src:url('./assets/chika-Regular.ttf') format('truetype');
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#eaf1fa;
+  color:#29354a;
+  font-family:'Chika','Hiragino Maru Gothic ProN','Yu Gothic',Meiryo,sans-serif;
+}
+
+button{
+  font:inherit;
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+
+button:focus-visible{
+  outline:3px solid #ec9938;
+  outline-offset:4px;
+}
+
+#game{
+  max-width:510px;
+  min-height:100svh;
+  margin:auto;
+  padding:18px 24px max(18px,env(safe-area-inset-bottom));
+  background:#fffdfb;
+  box-shadow:0 0 70px #506b8b12;
+}
+
+header,footer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  font-size:14px;
+  color:#6b7b8d;
+}
+
+header button,footer button{
+  padding:9px;
+  border:0;
+  background:none;
+  color:#536b84;
+  font-size:15px;
+}
+
+.heading{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin:12px 0 8px;
+}
+
+h1{
+  margin:0;
+  font-size:42px;
+  font-weight:900;
+  letter-spacing:-2px;
+  transform:rotate(-2deg);
+}
+
+h1 span{color:#427db2}
+
+.badge{
+  align-self:flex-end;
+  padding:4px;
+  border:1px solid #9bacc0;
+  border-radius:4px;
+  font-size:12px;
+  letter-spacing:2px;
+}
+
+#progress{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin:20px 0;
+}
+
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#dce3ea;
+}
+
+.dot.active{background:#608daf}
+
+.scene{
+  position:relative;
+  height:270px;
+  overflow:hidden;
+  border:1px solid #e1e8ef;
+  border-radius:50% 45% 18px 18px;
+  background:#f5f8fc;
+  transition:background .6s;
+}
+
+.characters{
+  position:absolute;
+  bottom:44px;
+  left:50%;
+  width:310px;
+  height:174px;
+  overflow:hidden;
+  mix-blend-mode:multiply;
+  transform:translateX(-50%);
+}
+
+.characters img{
+  position:absolute;
+  top:-113px;
+  left:-26px;
+  width:420px;
+  max-width:none;
+}
+
+.reaction{
+  position:absolute;
+  z-index:2;
+  top:17px;
+  left:35px;
+  min-width:100px;
+  padding:11px 24px;
+  border:2px solid #3b4754;
+  border-radius:48% 45% 48% 40%;
+  background:white;
+  font-size:27px;
+  text-align:center;
+  transform:rotate(-5deg);
+}
+
+.scene-caption{
+  position:absolute;
+  right:12px;
+  bottom:13px;
+  left:12px;
+  font-size:14px;
+  line-height:1.5;
+  text-align:center;
+}
+
+.scene.happy .characters{animation:bob .4s ease-in-out 2}
+.scene.fear{background:#dce0eb}
+.scene.fear .characters{animation:shake .13s linear 5}
+.scene.hesitant .reaction{animation:float .7s ease-in-out}
+
+.dialogue{
+  position:relative;
+  min-height:104px;
+  margin:19px 0 14px;
+  padding:0 8px;
+}
+
+.speaker{
+  color:#6086a5;
+  font-size:14px;
+  font-weight:bold;
+}
+
+#line{
+  margin:5px 0 0;
+  font-size:19px;
+  line-height:1.7;
+  white-space:pre-line;
+}
+
+#skip{
+  position:absolute;
+  right:0;
+  bottom:-7px;
+  padding:8px;
+  border:0;
+  background:none;
+  color:#8a9fb4;
+}
+
+#choices{
+  display:grid;
+  gap:10px;
+}
+
+.choice{
+  width:100%;
+  padding:12px 16px;
+  border:1.5px solid #94abc1;
+  border-bottom-width:4px;
+  border-radius:14px;
+  background:white;
+  color:#314e6b;
+  font-size:19px;
+  line-height:1.4;
+  text-align:left;
+  transition:transform .12s,background .12s;
+}
+
+.choice small{
+  display:block;
+  color:#657f98;
+  font-size:17px;
+}
+
+.choice:active{
+  border-bottom-width:2px;
+  background:#eaf2fa;
+  transform:translateY(2px);
+}
+
+.choice.primary{
+  border-color:#3e6789;
+  background:#4c7da4;
+  color:white;
+  text-align:center;
+}
+
+.choice:disabled{
+  opacity:.55;
+  cursor:default;
+}
+
+footer{
+  margin-top:16px;
+  padding-top:8px;
+  border-top:1px dashed #dce3ea;
+}
+
+.ending-title{
+  margin:4px 0 8px;
+  font-size:26px;
+  font-weight:900;
+}
+
+.ending .dialogue{min-height:0}
+.ending .scene{height:190px}
+.ending .characters{bottom:29px}
+.ending .scene-caption{bottom:8px}
+.ending #line{font-size:18px}
+.ending .reaction{top:9px}
+.ending .dialogue{margin-top:10px}
+
+@keyframes bob{50%{transform:translate(-50%,-8px)}}
+@keyframes shake{50%{transform:translateX(-49%)}}
+@keyframes float{50%{transform:rotate(4deg)}}
+
+@media(max-height:750px){
+  #game{padding-top:8px}
+  .heading{margin-top:4px}
+  h1{font-size:35px}
+  #progress{margin:10px 0}
+  .scene{height:225px}
+  .ending .scene{height:180px}
+  .dialogue{min-height:91px;margin-top:12px}
+  #line{font-size:18px}
+  .choice{padding:9px 14px;font-size:18px}
+  .choice small{font-size:16px}
+  footer{margin-top:9px}
+}
+
+@media(max-height:680px){
+  #game{padding-right:18px;padding-bottom:max(12px,env(safe-area-inset-bottom));padding-left:18px}
+  .heading{margin-bottom:4px}
+  #progress{margin:4px 0}
+  .scene{height:205px}
+  .ending .scene{height:140px}
+  .ending .dialogue{margin-top:5px}
+  .dialogue{min-height:84px;margin-bottom:11px}
+  #line{font-size:17px}
+  .choice{padding:8px 13px;font-size:17px}
+  .choice small{font-size:15px}
+  .ending-title{font-size:23px}
+  .ending #line{font-size:16px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition:none!important}
+}

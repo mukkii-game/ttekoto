@@ -112,7 +112,7 @@ function render(){
     heading.textContent=scene.title+(scene.truth?' ◎':'');
     $('line').before(heading);
     $('choices').append(
-      button('べつの「ってこと⁉︎」を ためす',()=>{path='';render()},true),
+      button('べつの「ってコト⁉︎」を ためす',()=>{path='';render()},true),
       button('ひとつ まえの せんたくに もどる',()=>{path=path.slice(0,-1);render()})
     );
   }else{
@@ -120,7 +120,7 @@ function render(){
       const element=button('',()=>choose(index));
       element.append(document.createTextNode(text));
       const suffix=document.createElement('small');
-      suffix.textContent='…ってこと⁉︎';
+      suffix.textContent='…ってコト⁉︎';
       element.append(suffix);
       $('choices').append(element);
     });
@@ -136,8 +136,8 @@ function choose(index){
   locked=true;
   finishText();
   $('speaker').textContent='はちわれ';
-  $('line').textContent=nodes[path].choices[index]+'…ってこと⁉︎';
-  $('reaction').textContent='…ってこと⁉︎';
+  $('line').textContent=nodes[path].choices[index]+'…ってコト⁉︎';
+  $('reaction').textContent='…ってコト⁉︎';
   choiceSound();
   for(const element of $('choices').children)element.disabled=true;
   setTimeout(()=>{
