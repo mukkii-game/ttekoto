@@ -41,7 +41,8 @@ header,footer{
   align-items:center;
   justify-content:space-between;
   gap:10px;
-  font-size:14px;
+  font-size:16px;
+  line-height:1.25;
   color:#6b7b8d;
 }
 
@@ -50,20 +51,22 @@ header button,footer button{
   border:0;
   background:none;
   color:#536b84;
-  font-size:15px;
+  font-size:17px;
+  line-height:1.2;
 }
 
 .heading{
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:12px;
-  margin:12px 0 8px;
+  gap:10px;
+  margin:8px 0 5px;
 }
 
 h1{
   margin:0;
-  font-size:42px;
+  font-size:46px;
+  line-height:1;
   font-weight:900;
   letter-spacing:-2px;
   transform:rotate(-2deg);
@@ -76,7 +79,8 @@ h1 span{color:#427db2}
   padding:4px;
   border:1px solid #9bacc0;
   border-radius:4px;
-  font-size:12px;
+  font-size:14px;
+  line-height:1.2;
   letter-spacing:2px;
 }
 
@@ -84,12 +88,12 @@ h1 span{color:#427db2}
   display:flex;
   justify-content:center;
   gap:8px;
-  margin:20px 0;
+  margin:14px 0;
 }
 
 .dot{
-  width:8px;
-  height:8px;
+  width:9px;
+  height:9px;
   border-radius:50%;
   background:#dce3ea;
 }
@@ -98,7 +102,7 @@ h1 span{color:#427db2}
 
 .scene{
   position:relative;
-  height:270px;
+  height:260px;
   overflow:hidden;
   border:1px solid #e1e8ef;
   border-radius:50% 45% 18px 18px;
@@ -135,7 +139,7 @@ h1 span{color:#427db2}
   border:2px solid #3b4754;
   border-radius:48% 45% 48% 40%;
   background:white;
-  font-size:27px;
+  font-size:30px;
   text-align:center;
   transform:rotate(-5deg);
 }
@@ -145,8 +149,8 @@ h1 span{color:#427db2}
   right:12px;
   bottom:13px;
   left:12px;
-  font-size:14px;
-  line-height:1.5;
+  font-size:16px;
+  line-height:1.4;
   text-align:center;
 }
 
@@ -157,21 +161,22 @@ h1 span{color:#427db2}
 
 .dialogue{
   position:relative;
-  min-height:104px;
-  margin:19px 0 14px;
+  min-height:108px;
+  margin:14px 0 10px;
   padding:0 8px;
 }
 
 .speaker{
   color:#6086a5;
-  font-size:14px;
+  font-size:16px;
+  line-height:1.2;
   font-weight:bold;
 }
 
 #line{
   margin:5px 0 0;
-  font-size:19px;
-  line-height:1.7;
+  font-size:21px;
+  line-height:1.6;
   white-space:pre-line;
 }
 
@@ -192,14 +197,14 @@ h1 span{color:#427db2}
 
 .choice{
   width:100%;
-  padding:12px 16px;
+  padding:10px 14px;
   border:1.5px solid #94abc1;
   border-bottom-width:4px;
   border-radius:14px;
   background:white;
   color:#314e6b;
-  font-size:19px;
-  line-height:1.4;
+  font-size:21px;
+  line-height:1.35;
   text-align:left;
   transition:transform .12s,background .12s;
 }
@@ -207,7 +212,7 @@ h1 span{color:#427db2}
 .choice small{
   display:block;
   color:#657f98;
-  font-size:17px;
+  font-size:19px;
 }
 
 .choice:active{
@@ -229,24 +234,25 @@ h1 span{color:#427db2}
 }
 
 footer{
-  margin-top:16px;
-  padding-top:8px;
+  margin-top:8px;
+  padding-top:5px;
   border-top:1px dashed #dce3ea;
 }
 
 .ending-title{
-  margin:4px 0 8px;
-  font-size:26px;
+  margin:3px 0 6px;
+  font-size:30px;
+  line-height:1.15;
   font-weight:900;
 }
 
 .ending .dialogue{min-height:0}
-.ending .scene{height:190px}
+.ending .scene{height:170px}
 .ending .characters{bottom:29px}
 .ending .scene-caption{bottom:8px}
-.ending #line{font-size:18px}
+.ending #line{font-size:20px;line-height:1.55}
 .ending .reaction{top:9px}
-.ending .dialogue{margin-top:10px}
+.ending .dialogue{margin-top:8px}
 
 @keyframes bob{50%{transform:translate(-50%,-8px)}}
 @keyframes shake{50%{transform:translateX(-49%)}}
@@ -255,30 +261,30 @@ footer{
 @media(max-height:750px){
   #game{padding-top:8px}
   .heading{margin-top:4px}
-  h1{font-size:35px}
-  #progress{margin:10px 0}
-  .scene{height:225px}
-  .ending .scene{height:180px}
-  .dialogue{min-height:91px;margin-top:12px}
-  #line{font-size:18px}
-  .choice{padding:9px 14px;font-size:18px}
-  .choice small{font-size:16px}
-  footer{margin-top:9px}
+  h1{font-size:39px}
+  #progress{margin:6px 0}
+  .scene{height:210px}
+  .ending .scene{height:155px}
+  .dialogue{min-height:96px;margin-top:9px}
+  #line{font-size:20px}
+  .choice{padding:7px 12px;font-size:20px}
+  .choice small{font-size:18px}
+  footer{margin-top:6px}
 }
 
 @media(max-height:680px){
-  #game{padding-right:18px;padding-bottom:max(12px,env(safe-area-inset-bottom));padding-left:18px}
-  .heading{margin-bottom:4px}
-  #progress{margin:4px 0}
-  .scene{height:205px}
-  .ending .scene{height:140px}
-  .ending .dialogue{margin-top:5px}
-  .dialogue{min-height:84px;margin-bottom:11px}
-  #line{font-size:17px}
-  .choice{padding:8px 13px;font-size:17px}
-  .choice small{font-size:15px}
-  .ending-title{font-size:23px}
-  .ending #line{font-size:16px}
+  #game{padding-right:16px;padding-bottom:max(10px,env(safe-area-inset-bottom));padding-left:16px}
+  .heading{margin-bottom:2px}
+  #progress{margin:2px 0}
+  .scene{height:185px}
+  .ending .scene{height:115px}
+  .ending .dialogue{margin-top:4px}
+  .dialogue{min-height:88px;margin-bottom:8px}
+  #line{font-size:19px}
+  .choice{padding:6px 11px;font-size:19px}
+  .choice small{font-size:17px}
+  .ending-title{font-size:27px}
+  .ending #line{font-size:18px;line-height:1.5}
 }
 
 @media(prefers-reduced-motion:reduce){
