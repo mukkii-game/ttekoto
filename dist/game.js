@@ -94,9 +94,10 @@ function render(){
   $('game').classList.toggle('ending',!!ending);
   $('scene').className='scene '+scene.mood;
   $('caption').textContent=ending?scene.genre:scene.caption;
+  $('speaker').hidden=!ending;
   $('speaker').textContent=ending
     ?'おはなし '+(parseInt(path,2)+1).toString().padStart(2,'0')+' / '+TOTAL_ENDINGS
-    :'ちいかわ';
+    :'';
   $('progress').innerHTML=Array.from({length:STEPS},(_,i)=>
     '<span class="dot '+(i<path.length?'active':'')+'"></span>'
   ).join('');
@@ -134,7 +135,6 @@ function choose(index){
   if(locked)return;
   locked=true;
   finishText();
-  $('speaker').textContent='はちわれ';
   $('line').textContent=nodes[path].choices[index]+'…ってコト⁉︎';
   choiceSound();
   for(const element of $('choices').children)element.disabled=true;
