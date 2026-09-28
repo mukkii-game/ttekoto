@@ -605,6 +605,48 @@ h1 span{color:#427db2}
   white-space:nowrap;
 }
 
+.measurement-diagram{
+  display:grid;
+  justify-items:center;
+  gap:5px;
+  margin:7px 0 3px;
+  color:#6e7890;
+  font-size:15px;
+}
+
+.measurement-diagram>div{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.measurement-superposition b{
+  padding:5px 9px;
+  border-radius:999px;
+  background:#e1eef7;
+  color:#466f91;
+  font-size:16px;
+}
+
+.measurement-superposition i,
+.measurement-flow i{
+  color:#a5648b;
+  font-size:16px;
+}
+
+.measurement-flow em{
+  color:#6e7890;
+  font-size:15px;
+}
+
+.measurement-result{
+  padding:4px 9px;
+  border-radius:999px;
+  background:#f4e3ed;
+  color:#8d5c7c;
+  font-size:15px;
+}
+
 .scene[data-visual="phase-cycle"] .experiment,
 .scene[data-visual="complex"] .experiment,
 .scene[data-visual="amplitude"] .experiment,
@@ -619,7 +661,8 @@ h1 span{color:#427db2}
 .scene[data-visual="eraser"] .experiment,
 .scene[data-visual="time"] .experiment,
 .scene[data-visual="correlation"] .experiment,
-.scene[data-visual="observation"] .experiment{
+.scene[data-visual="observation"] .experiment,
+.scene[data-visual="measurement-problem"] .experiment{
   opacity:.09;
 }
 
@@ -638,6 +681,7 @@ h1 span{color:#427db2}
 .scene[data-visual="time"] .term-guide,
 .scene[data-visual="correlation"] .term-guide,
 .scene[data-visual="observation"] .term-guide,
+.scene[data-visual="measurement-problem"] .term-guide,
 .scene[data-visual="phase-cycle"] .phase-cycle-card,
 .scene[data-visual="complex"] .complex-card,
 .scene[data-visual="amplitude"] .amplitude-card,
@@ -652,7 +696,8 @@ h1 span{color:#427db2}
 .scene[data-visual="eraser"] .eraser-card,
 .scene[data-visual="time"] .time-card,
 .scene[data-visual="correlation"] .time-card,
-.scene[data-visual="observation"] .observation-card{
+.scene[data-visual="observation"] .observation-card,
+.scene[data-visual="measurement-problem"] .measurement-card{
   display:block;
 }
 

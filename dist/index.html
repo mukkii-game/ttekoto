@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#eff5fc">
   <title>…ってコト⁉︎</title>
-  <link rel="stylesheet" href="./style.css?v=20260929d">
+  <link rel="stylesheet" href="./style.css?v=20260929g">
 </head>
 <body>
   <main id="game">
@@ -204,20 +204,20 @@
           </svg>
         </div>
 
-        <div class="term-card entanglement-card" role="img" aria-label="量子もつれ。電子の道と装置の印を組で表す">
+        <div class="term-card entanglement-card" role="img" aria-label="量子もつれ。電子の道と監視装置の記録を組で表す">
           <strong>量子もつれ</strong>
-          <span>道と印を、ばらさず組で表す</span>
+          <span>道と記録を、ばらさず組で表す</span>
           <div class="pair-lines">
-            <div><b>右の道</b><i>＋</i><em>右の印</em></div>
-            <div><b>左の道</b><i>＋</i><em>左の印</em></div>
+            <div><b>上の道</b><i>＋</i><em>上の記録</em></div>
+            <div><b>下の道</b><i>＋</i><em>下の記録</em></div>
           </div>
         </div>
 
-        <div class="term-card decoherence-card" role="img" aria-label="デコヒーレンス。道の印が空気や光や壁へ広がる">
+        <div class="term-card decoherence-card" role="img" aria-label="デコヒーレンス。道の記録が空気や光や壁へ広がる">
           <strong>デコヒーレンス</strong>
-          <span>道の印が、周り中へ広がる</span>
+          <span>道の記録が、周り中へ広がる</span>
           <div class="leak-diagram">
-            <b>道の印</b><i>→</i>
+            <b>道の記録</b><i>→</i>
             <div><em>空気</em><em>光</em><em>壁</em></div>
           </div>
         </div>
@@ -248,7 +248,7 @@
           </div>
         </div>
 
-        <div class="term-card time-card" role="img" aria-label="先の着地点と、あとの装置の記録を照合して相関を見る">
+        <div class="term-card time-card" role="img" aria-label="先の着地点と、あとの監視装置の記録を照合して相関を見る">
           <strong>記録の照合</strong>
           <span>過去を変えず、あとで組み分ける</span>
           <div class="time-diagram">
@@ -256,13 +256,22 @@
           </div>
         </div>
 
-        <div class="term-card observation-card" role="img" aria-label="観察は、人の意識ではなく、量子と装置の相互作用で記録ができること">
-          <strong>観察</strong>
+        <div class="term-card observation-card" role="img" aria-label="観測は、人の意識ではなく、量子と測定器の相互作用で記録ができること">
+          <strong>観測</strong>
           <span>意識ではなく、相互作用と記録</span>
           <div class="observation-diagram">
-            <b>量子</b><i>→</i><b>装置</b><i>→</i><b>記録</b>
+            <b>量子</b><i>→</i><b>測定器</b><i>→</i><b>記録</b>
           </div>
           <small>人が読むのは、あとでもいい</small>
+        </div>
+
+        <div class="term-card measurement-card" role="img" aria-label="観測問題。波の式では上の記録と下の記録が重なるのに、実験では一回ごとに一つの結果だけが得られる">
+          <strong>観測問題</strong>
+          <span>重なりの計算から、なぜ一つの結果？</span>
+          <div class="measurement-diagram">
+            <div class="measurement-superposition"><b>上の記録</b><i>＋</i><b>下の記録</b></div>
+            <div class="measurement-flow"><em>波の式</em><i>→ なぜ？ →</i><b class="measurement-result">一回に一つ</b></div>
+          </div>
         </div>
       </div>
 
@@ -289,6 +298,6 @@
     </footer>
   </main>
 
-  <script type="module" src="./game.js?v=20260929d"></script>
+  <script type="module" src="./game.js?v=20260929h"></script>
 </body>
 </html>
