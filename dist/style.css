@@ -1,6 +1,6 @@
 @font-face{
-  font-family:'Chika';
-  src:url('./assets/chika-Regular.ttf') format('truetype');
+  font-family:'Yomogi';
+  src:url('./assets/Yomogi-Regular.ttf') format('truetype');
   font-style:normal;
   font-weight:400;
   font-display:swap;
@@ -12,7 +12,7 @@ body{
   margin:0;
   background:#eaf1fa;
   color:#29354a;
-  font-family:'Chika','Hiragino Maru Gothic ProN','Yu Gothic',Meiryo,sans-serif;
+  font-family:'Yomogi','Klee One','Hiragino Maru Gothic ProN','Yu Gothic',Meiryo,sans-serif;
 }
 
 button{
@@ -358,7 +358,7 @@ h1 span{color:#427db2}
 .guide-arrow.second-arrow{stroke:#b06c98}
 .guide-arrow.strong-arrow{stroke-width:8}
 .term-card marker path{fill:#4f86ae}
-.term-card text{fill:#6c7690;font-family:'Chika',sans-serif;font-size:16px}
+.term-card text{fill:#6c7690;font-family:'Yomogi',sans-serif;font-size:16px}
 .term-card .guide-note{font-size:15px}
 .term-card .guide-result{fill:#9c5d89;font-size:17px}
 

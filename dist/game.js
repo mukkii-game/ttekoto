@@ -1,7 +1,7 @@
 import {lessons,ending} from './story.js';
 
 const $=id=>document.getElementById(id);
-const RIDDLE_NAMES=['いち','に','さん','よん','ご','ろく','なな','はち','きゅう','じゅう','じゅういち','じゅうに'];
+const RIDDLE_NAMES=['一','二','三','四','五','六','七','八','九','十','十一','十二'];
 let step=0,sound=true,audioUnlocked=false,ctx,timer,afterWrite=null,full='',typing=false,locked=false,waitingForAdvance=false;
 
 function tone(freq=600,duration=.045,delay=0,type='sine',volume=.035,endFreq=freq*.86){
@@ -107,7 +107,7 @@ function render(){
   $('game').classList.toggle('ending',finished);
   $('scene').className='scene';
   $('scene').dataset.visual=scene.visual;
-  $('step-label').textContent=finished?'おさらい':'なぞ '+RIDDLE_NAMES[step];
+  $('step-label').textContent=finished?'おさらい':'謎 '+RIDDLE_NAMES[step];
   $('caption').textContent=scene.caption;
   $('back').disabled=step===0;
   $('choices').replaceChildren();
@@ -119,14 +119,14 @@ function render(){
     heading.className='ending-title';
     heading.textContent=scene.title;
     $('line').before(heading);
-    $('choices').append(button('もういちど おさらいする',()=>{step=0;render()},true));
-    $('collection').textContent='おさらい できた';
+    $('choices').append(button('もう一度おさらいする',()=>{step=0;render()},true));
+    $('collection').textContent='おさらい完了';
   }else{
     renderProgress(step);
     lessons[step].choices.forEach((text,index)=>{
       $('choices').append(questionButton(text,index));
     });
-    $('collection').textContent='なぞ '+RIDDLE_NAMES[step]+' / じゅうに';
+    $('collection').textContent='謎 '+RIDDLE_NAMES[step]+' / 十二';
   }
 
   write(scene.line);
@@ -134,9 +134,9 @@ function render(){
 
 function showWrong(lesson,choice){
   $('scene').classList.add('wrong');
-  write('「'+choice+'…ってコト⁉︎」\nって、こっちじゃ ないよね。\n\nせいかいを もういちど えらぼう。\n'+lesson.hint);
+  write('「'+choice+'…ってコト⁉︎」\nって、こっちじゃないよね。\n\n正解をもう一度選ぼう。\n'+lesson.hint);
   $('choices').replaceChildren(
-    button('もういちど えらぶ',()=>render(),true)
+    button('もう一度選ぶ',()=>render(),true)
   );
   answerSound(false);
 }
@@ -146,12 +146,12 @@ function showCorrect(lesson){
   const last=step===lessons.length-1;
   const notice=document.createElement('div');
   notice.className='next-notice';
-  notice.textContent='せつめいを よんでね';
+  notice.textContent='説明を読んでね';
   $('choices').replaceChildren(notice);
-  write('うん、せいかい。\n\n'+lesson.explain,()=>{
+  write('うん、正解。\n\n'+lesson.explain,()=>{
     waitingForAdvance=true;
     notice.classList.add('ready');
-    notice.textContent=last?'タップで おさらいへ':'タップで つぎの なぞへ';
+    notice.textContent=last?'タップでおさらいへ':'タップで次の謎へ';
   });
   answerSound(true);
 }
@@ -172,7 +172,7 @@ function choose(index){
   },520);
 }
 
-$('sound').textContent='おと あり';
+$('sound').textContent='音あり';
 $('sound').setAttribute('aria-pressed','true');
 document.addEventListener('click',event=>{
   audioUnlocked=true;
@@ -181,7 +181,7 @@ document.addEventListener('click',event=>{
 $('sound').onclick=()=>{
   audioUnlocked=true;
   sound=!sound;
-  $('sound').textContent='おと '+(sound?'あり':'なし');
+  $('sound').textContent='音'+(sound?'あり':'なし');
   $('sound').setAttribute('aria-pressed',String(sound));
   if(sound){
     tone(650,.06,0,'triangle',.03,780);
