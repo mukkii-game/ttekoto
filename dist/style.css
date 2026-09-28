@@ -750,6 +750,23 @@ footer button:disabled{
   cursor:default;
 }
 
+#collection{
+  padding:4px;
+  color:#6b7b8d;
+  font-size:16px;
+  white-space:nowrap;
+}
+
+#collection:disabled{
+  opacity:1;
+}
+
+#collection:not(:disabled){
+  color:#3e6789;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+
 .ending-title{
   margin:0 0 9px;
   color:#476b89;

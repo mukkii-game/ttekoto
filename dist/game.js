@@ -121,12 +121,16 @@ function render(){
     $('line').before(heading);
     $('choices').append(button('もう一度おさらいする',()=>{step=0;render()},true));
     $('collection').textContent='おさらい完了';
+    $('collection').disabled=false;
+    $('collection').setAttribute('aria-label','おさらいを終えて最初へ戻る');
   }else{
     renderProgress(step);
     lessons[step].choices.forEach((text,index)=>{
       $('choices').append(questionButton(text,index));
     });
     $('collection').textContent='謎 '+RIDDLE_NAMES[step]+' / '+RIDDLE_NAMES[lessons.length-1];
+    $('collection').disabled=true;
+    $('collection').removeAttribute('aria-label');
   }
 
   write(scene.line);
@@ -197,6 +201,11 @@ $('restart').onclick=()=>{
 $('back').onclick=()=>{
   if(locked||step===0)return;
   step--;
+  render();
+};
+$('collection').onclick=()=>{
+  if($('collection').disabled||locked)return;
+  step=0;
   render();
 };
 document.addEventListener('click',event=>{
