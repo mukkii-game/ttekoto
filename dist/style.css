@@ -88,13 +88,13 @@ h1 span{color:#427db2}
 #progress{
   display:flex;
   justify-content:center;
-  gap:8px;
+  gap:5px;
   margin:13px 0;
 }
 
 .dot{
-  width:9px;
-  height:9px;
+  width:7px;
+  height:7px;
   border-radius:50%;
   background:#dce3ea;
   transition:background .25s,transform .25s;
@@ -386,15 +386,223 @@ h1 span{color:#427db2}
 .term-card .guide-note{font-size:15px}
 .term-card .guide-result{fill:#9c5d89;font-size:17px}
 
+.term-card i,
+.term-card em{
+  font-style:normal;
+}
+
+.pair-lines{
+  display:grid;
+  gap:7px;
+  margin:7px auto 4px;
+  max-width:250px;
+}
+
+.pair-lines div{
+  display:grid;
+  grid-template-columns:1fr 28px 1fr;
+  align-items:center;
+  font-size:18px;
+}
+
+.pair-lines b,
+.pair-lines em{
+  padding:4px 8px;
+  border-radius:999px;
+  background:#e2eff8;
+  color:#466f91;
+}
+
+.pair-lines em{
+  background:#f5e3ee;
+  color:#945b80;
+}
+
+.leak-diagram{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin:15px 0 12px;
+  font-size:18px;
+}
+
+.leak-diagram>b{
+  padding:9px 12px;
+  border-radius:50%;
+  background:#e2eff8;
+  color:#466f91;
+}
+
+.leak-diagram>i{color:#b06c98;font-size:28px}
+
+.leak-diagram div{
+  display:flex;
+  gap:5px;
+}
+
+.leak-diagram em{
+  padding:5px;
+  border-radius:50%;
+  background:#f4e4ee;
+  color:#8e5e80;
+  font-size:16px;
+}
+
+.tradeoff-diagram{
+  display:grid;
+  grid-template-columns:55px 1fr 55px;
+  align-items:center;
+  gap:7px;
+  margin:14px auto 6px;
+  max-width:260px;
+  color:#4a7393;
+  font-size:18px;
+}
+
+.tradeoff-diagram i{
+  position:relative;
+  height:8px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#5791b8,#cf7ba6);
+  transform:rotate(-7deg);
+}
+
+.tradeoff-diagram i::after{
+  content:'';
+  position:absolute;
+  top:6px;
+  left:50%;
+  width:4px;
+  height:24px;
+  border-radius:3px;
+  background:#71899e;
+}
+
+.term-card small{
+  display:block;
+  color:#718095;
+  font-size:15px;
+}
+
+.matrix-grid{
+  display:grid;
+  grid-template-columns:repeat(2,82px);
+  justify-content:center;
+  gap:5px;
+  margin:6px 0 4px;
+}
+
+.matrix-grid b,
+.matrix-grid em{
+  padding:5px 4px;
+  border-radius:8px;
+  background:#dcecf7;
+  color:#456d8e;
+  font-size:16px;
+}
+
+.matrix-grid em{
+  background:#f3e2ec;
+  color:#945d80;
+}
+
+.eraser-diagram{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin:10px 0 7px;
+}
+
+.eraser-diagram b{
+  padding:8px 3px;
+  border-radius:8px;
+  color:#365f80;
+  font-size:16px;
+  background:repeating-linear-gradient(90deg,#d9eaf5 0 9px,#77a8c9 9px 15px);
+}
+
+.eraser-diagram .reverse-stripe{
+  background:repeating-linear-gradient(90deg,#77a8c9 0 9px,#d9eaf5 9px 15px);
+}
+
+.eraser-diagram i{
+  grid-column:1/-1;
+  color:#7a7089;
+  font-size:16px;
+}
+
+.time-diagram,
+.observation-diagram{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin:15px 0 12px;
+  font-size:17px;
+}
+
+.time-diagram b,
+.observation-diagram b{
+  padding:7px 8px;
+  border-radius:9px;
+  background:#e1eef7;
+  color:#466f91;
+}
+
+.time-diagram i,
+.observation-diagram i{
+  color:#a5648b;
+  font-size:22px;
+}
+
+.time-diagram em{
+  color:#8d5b7b;
+  white-space:nowrap;
+}
+
 .scene[data-visual="amplitude"] .experiment,
-.scene[data-visual="phase"] .experiment{
+.scene[data-visual="phase"] .experiment,
+.scene[data-visual="entanglement-guide"] .experiment,
+.scene[data-visual="decoherence"] .experiment,
+.scene[data-visual="partial"] .experiment,
+.scene[data-visual="complementarity"] .experiment,
+.scene[data-visual="matrix-intro"] .experiment,
+.scene[data-visual="density"] .experiment,
+.scene[data-visual="eraser-intro"] .experiment,
+.scene[data-visual="eraser"] .experiment,
+.scene[data-visual="time"] .experiment,
+.scene[data-visual="correlation"] .experiment,
+.scene[data-visual="observation"] .experiment{
   opacity:.09;
 }
 
 .scene[data-visual="amplitude"] .term-guide,
 .scene[data-visual="phase"] .term-guide,
+.scene[data-visual="entanglement-guide"] .term-guide,
+.scene[data-visual="decoherence"] .term-guide,
+.scene[data-visual="partial"] .term-guide,
+.scene[data-visual="complementarity"] .term-guide,
+.scene[data-visual="matrix-intro"] .term-guide,
+.scene[data-visual="density"] .term-guide,
+.scene[data-visual="eraser-intro"] .term-guide,
+.scene[data-visual="eraser"] .term-guide,
+.scene[data-visual="time"] .term-guide,
+.scene[data-visual="correlation"] .term-guide,
+.scene[data-visual="observation"] .term-guide,
 .scene[data-visual="amplitude"] .amplitude-card,
-.scene[data-visual="phase"] .phase-card{
+.scene[data-visual="phase"] .phase-card,
+.scene[data-visual="entanglement-guide"] .entanglement-card,
+.scene[data-visual="decoherence"] .decoherence-card,
+.scene[data-visual="partial"] .tradeoff-card,
+.scene[data-visual="complementarity"] .tradeoff-card,
+.scene[data-visual="matrix-intro"] .matrix-card,
+.scene[data-visual="density"] .matrix-card,
+.scene[data-visual="eraser-intro"] .eraser-card,
+.scene[data-visual="eraser"] .eraser-card,
+.scene[data-visual="time"] .time-card,
+.scene[data-visual="correlation"] .time-card,
+.scene[data-visual="observation"] .observation-card{
   display:block;
 }
 
@@ -579,6 +787,7 @@ footer button:disabled{
   .scene{height:280px}
   .lesson-characters{width:96px;height:86px}
   .experiment{top:80px;height:158px}
+  .term-guide{top:90px}
   .dialogue{margin-top:11px}
 }
 

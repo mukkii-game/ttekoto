@@ -1,7 +1,7 @@
 import {lessons,ending} from './story.js';
 
 const $=id=>document.getElementById(id);
-const RIDDLE_NAMES=['一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四'];
+const RIDDLE_NAMES=['一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四','十五','十六','十七','十八','十九','二十','二十一'];
 let step=0,sound=true,audioUnlocked=false,ctx,timer,afterWrite=null,full='',typing=false,locked=false,waitingForAdvance=false;
 
 function tone(freq=600,duration=.045,delay=0,type='sine',volume=.035,endFreq=freq*.86){
