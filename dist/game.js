@@ -2,7 +2,7 @@ import {lessons,ending} from './story.js';
 
 const $=id=>document.getElementById(id);
 const RIDDLE_NAMES=['いち','に','さん','よん','ご','ろく','なな','はち','きゅう','じゅう','じゅういち','じゅうに'];
-let step=0,sound=true,audioUnlocked=false,ctx,timer,advanceTimer,afterWrite=null,full='',typing=false,locked=false;
+let step=0,sound=true,audioUnlocked=false,ctx,timer,afterWrite=null,full='',typing=false,locked=false,waitingForAdvance=false;
 
 function tone(freq=600,duration=.045,delay=0,type='sine',volume=.035,endFreq=freq*.86){
   if(!sound||!audioUnlocked)return;
@@ -100,8 +100,8 @@ function renderProgress(current){
 }
 
 function render(){
-  clearTimeout(advanceTimer);
   locked=false;
+  waitingForAdvance=false;
   const finished=step>=lessons.length;
   const scene=finished?ending:lessons[step];
   $('game').classList.toggle('ending',finished);
@@ -145,11 +145,13 @@ function showCorrect(lesson){
   $('scene').classList.add('correct');
   const last=step===lessons.length-1;
   const notice=document.createElement('div');
-  notice.className='auto-next';
-  notice.textContent=last?'さいごの おさらいへ…':'つぎの なぞへ…';
+  notice.className='next-notice';
+  notice.textContent='せつめいを よんでね';
   $('choices').replaceChildren(notice);
   write('うん、せいかい。\n\n'+lesson.explain,()=>{
-    advanceTimer=setTimeout(()=>{step++;render()},1600);
+    waitingForAdvance=true;
+    notice.classList.add('ready');
+    notice.textContent=last?'タップで おさらいへ':'タップで つぎの なぞへ';
   });
   answerSound(true);
 }
@@ -197,6 +199,12 @@ $('back').onclick=()=>{
   step--;
   render();
 };
+document.addEventListener('click',event=>{
+  if(!waitingForAdvance||event.target.closest?.('button'))return;
+  waitingForAdvance=false;
+  step++;
+  render();
+});
 document.addEventListener('visibilitychange',()=>{
   if(document.hidden){
     finishText();

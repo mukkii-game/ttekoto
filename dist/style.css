@@ -415,11 +415,14 @@ h1 span{color:#427db2}
   cursor:default;
 }
 
-.auto-next{
+.next-notice{
   padding:10px 12px;
   color:#68849b;
   font-size:18px;
   text-align:center;
+}
+
+.next-notice.ready{
   animation:nextPulse 1s ease-in-out infinite alternate;
 }
 
