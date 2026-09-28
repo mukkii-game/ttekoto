@@ -1,16 +1,8 @@
-import {nodes,endings} from './story.js';
+import {lessons,ending} from './story.js';
 
 const $=id=>document.getElementById(id);
-const STEPS=4;
-const TOTAL_ENDINGS=Object.keys(endings).length;
-const STORAGE_KEY='ttekoto-pilot-endings';
-let path='',sound=true,audioUnlocked=false,ctx,timer,full='',typing=false,locked=false;
-let seen=new Set();
-
-try{
-  const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
-  seen=new Set(saved.filter(key=>endings[key]));
-}catch{}
+const STEP_NAMES=['ひとつめ','ふたつめ','みっつめ','よっつめ','いつつめ','むっつめ','ななつめ','やっつめ','ここのつめ','とおめ'];
+let step=0,sound=true,audioUnlocked=false,ctx,timer,full='',typing=false,locked=false;
 
 function tone(freq=600,duration=.045,delay=0,type='sine',volume=.035,endFreq=freq*.86){
   if(!sound||!audioUnlocked)return;
@@ -38,16 +30,13 @@ function typeSound(character,index){
   tone(pitch,.025,0,'triangle',.012,pitch*.94);
 }
 
-function reactionSound(mood){
-  if(mood==='happy'){
-    tone(660,.1,0,'sine',.035,740);
-    tone(990,.16,.08,'sine',.025,1110);
-  }else if(mood==='fear'){
-    tone(190,.18,0,'sawtooth',.018,105);
-    tone(310,.11,.09,'triangle',.014,240);
+function answerSound(correct){
+  if(correct){
+    tone(660,.1,0,'sine',.035,760);
+    tone(990,.17,.08,'sine',.026,1120);
   }else{
-    tone(470,.08,0,'triangle',.022,420);
-    tone(350,.07,.1,'sine',.016,350);
+    tone(260,.14,0,'triangle',.026,190);
+    tone(210,.12,.11,'sine',.018,170);
   }
 }
 
@@ -69,79 +58,106 @@ function write(text){
   $('line').textContent='';
   typing=true;
   $('skip').hidden=false;
-  let i=0;
+  let index=0;
   timer=setInterval(()=>{
-    i++;
-    const character=full[i-1];
-    $('line').textContent=full.slice(0,i);
-    typeSound(character,i);
-    if(i>=full.length)finishText();
-  },25);
+    index++;
+    const character=full[index-1];
+    $('line').textContent=full.slice(0,index);
+    typeSound(character,index);
+    if(index>=full.length)finishText();
+  },22);
 }
 
-function button(label,fn,primary=false){
+function button(label,action,primary=false){
   const element=document.createElement('button');
   element.className='choice'+(primary?' primary':'');
   element.textContent=label;
-  element.onclick=fn;
+  element.onclick=action;
   return element;
+}
+
+function questionButton(text,index){
+  const element=button('',()=>choose(index));
+  const lead=document.createElement('small');
+  lead.className='choice-lead';
+  lead.textContent='それって、';
+  const phrase=document.createElement('span');
+  phrase.textContent=text;
+  const suffix=document.createElement('small');
+  suffix.textContent='…ってコト⁉︎';
+  element.append(lead,phrase,suffix);
+  return element;
+}
+
+function renderProgress(current){
+  $('progress').innerHTML=Array.from({length:lessons.length},(_,index)=>
+    '<span class="dot '+(index<=current?'active':'')+'"></span>'
+  ).join('');
 }
 
 function render(){
   locked=false;
-  const ending=endings[path];
-  const scene=ending||nodes[path];
-  $('game').classList.toggle('ending',!!ending);
-  $('scene').className='scene '+scene.mood;
-  $('caption').textContent=ending?scene.genre:scene.caption;
-  $('speaker').hidden=!ending;
-  $('speaker').textContent=ending
-    ?'おはなし '+(parseInt(path,2)+1).toString().padStart(2,'0')+' / '+TOTAL_ENDINGS
-    :'';
-  $('progress').innerHTML=Array.from({length:STEPS},(_,i)=>
-    '<span class="dot '+(i<path.length?'active':'')+'"></span>'
-  ).join('');
+  const finished=step>=lessons.length;
+  const scene=finished?ending:lessons[step];
+  $('game').classList.toggle('ending',finished);
+  $('scene').className='scene';
+  $('scene').dataset.visual=scene.visual;
+  $('caption').textContent=scene.caption;
   $('choices').replaceChildren();
   document.querySelector('.ending-title')?.remove();
 
-  if(ending){
-    seen.add(path);
-    try{localStorage.setItem(STORAGE_KEY,JSON.stringify([...seen]))}catch{}
+  if(finished){
+    renderProgress(lessons.length);
     const heading=document.createElement('h2');
     heading.className='ending-title';
-    heading.textContent=scene.title+(scene.truth?' ◎':'');
+    heading.textContent=scene.title;
     $('line').before(heading);
-    $('choices').append(
-      button('べつの「ってコト⁉︎」を ためす',()=>{path='';render()},true),
-      button('ひとつ まえの せんたくに もどる',()=>{path=path.slice(0,-1);render()})
-    );
+    $('choices').append(button('もういちど おさらいする',()=>{step=0;render()},true));
+    $('collection').textContent='おさらい できた';
   }else{
-    scene.choices.forEach((text,index)=>{
-      const element=button('',()=>choose(index));
-      element.append(document.createTextNode(text));
-      const suffix=document.createElement('small');
-      suffix.textContent='…ってコト⁉︎';
-      element.append(suffix);
-      $('choices').append(element);
+    renderProgress(step);
+    lessons[step].choices.forEach((text,index)=>{
+      $('choices').append(questionButton(text,index));
     });
+    $('collection').textContent='もんだい '+STEP_NAMES[step]+' / とお';
   }
 
   write(scene.line);
-  $('collection').textContent='おはなし '+seen.size+' / '+TOTAL_ENDINGS;
-  reactionSound(scene.mood);
+}
+
+function showWrong(lesson,choice){
+  $('scene').classList.add('wrong');
+  write('「'+choice+'…ってコト⁉︎」\nって、こっちじゃ ないよね。\n\nせいかいを もういちど えらぼう。\n'+lesson.hint);
+  $('choices').replaceChildren(
+    button('もういちど えらぶ',()=>render(),true)
+  );
+  answerSound(false);
+}
+
+function showCorrect(lesson){
+  $('scene').classList.add('correct');
+  write('うん、せいかい。\n\n'+lesson.explain);
+  const last=step===lessons.length-1;
+  $('choices').replaceChildren(
+    button(last?'さいごの おさらいへ':'つぎの ふしぎへ',()=>{step++;render()},true)
+  );
+  answerSound(true);
 }
 
 function choose(index){
   if(locked)return;
   locked=true;
   finishText();
-  $('line').textContent=nodes[path].choices[index]+'…ってコト⁉︎';
+  const lesson=lessons[step];
+  const choice=lesson.choices[index];
+  $('line').textContent='それって、\n'+choice+'…ってコト⁉︎';
   choiceSound();
   for(const element of $('choices').children)element.disabled=true;
   setTimeout(()=>{
-    path+=index;
-    render();
-  },540);
+    locked=false;
+    if(index===lesson.answer)showCorrect(lesson);
+    else showWrong(lesson,choice);
+  },520);
 }
 
 $('sound').textContent='おと あり';
@@ -163,7 +179,7 @@ $('sound').onclick=()=>{
 $('skip').onclick=finishText;
 $('restart').onclick=()=>{
   if(locked)return;
-  path='';
+  step=0;
   render();
 };
 document.addEventListener('visibilitychange',()=>{

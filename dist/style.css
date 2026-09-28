@@ -41,9 +41,9 @@ header,footer{
   align-items:center;
   justify-content:space-between;
   gap:10px;
+  color:#6b7b8d;
   font-size:16px;
   line-height:1.25;
-  color:#6b7b8d;
 }
 
 header button,footer button{
@@ -66,8 +66,8 @@ header button,footer button{
 h1{
   margin:0;
   font-size:46px;
-  line-height:1;
   font-weight:900;
+  line-height:1;
   letter-spacing:-2px;
   white-space:nowrap;
   transform:rotate(-2deg);
@@ -77,7 +77,7 @@ h1 span{color:#427db2}
 
 .badge{
   align-self:flex-end;
-  padding:4px;
+  padding:4px 6px;
   border:1px solid #9bacc0;
   border-radius:4px;
   font-size:14px;
@@ -89,7 +89,7 @@ h1 span{color:#427db2}
   display:flex;
   justify-content:center;
   gap:8px;
-  margin:14px 0;
+  margin:13px 0;
 }
 
 .dot{
@@ -97,77 +97,202 @@ h1 span{color:#427db2}
   height:9px;
   border-radius:50%;
   background:#dce3ea;
+  transition:background .25s,transform .25s;
 }
 
-.dot.active{background:#608daf}
+.dot.active{
+  background:#608daf;
+  transform:scale(1.08);
+}
 
 .scene{
   position:relative;
-  height:260px;
+  height:325px;
   overflow:hidden;
-  border:1px solid #e1e8ef;
-  border-radius:50% 45% 18px 18px;
-  background:#f5f8fc;
-  transition:background .6s;
+  border:1px solid #d8e3ed;
+  border-radius:48% 44% 20px 20px;
+  background:linear-gradient(#f8fbff,#eef5fb);
+  transition:background .4s,border-color .4s;
 }
 
-.characters{
+.lesson-characters{
   position:absolute;
-  inset:0 0 36px;
+  z-index:2;
+  top:3px;
+  left:50%;
+  width:124px;
+  height:111px;
   overflow:hidden;
   mix-blend-mode:multiply;
+  transform:translateX(-50%);
 }
 
-.characters img{
+.lesson-characters img{
   display:block;
   width:auto;
   max-width:100%;
   height:100%;
   margin:auto;
   object-fit:contain;
-  object-position:center;
   clip-path:inset(0 0 0 3px);
+}
+
+.experiment{
+  position:absolute;
+  z-index:1;
+  top:105px;
+  right:7px;
+  left:7px;
+  height:178px;
+}
+
+.experiment svg{
+  display:block;
+  width:100%;
+  height:100%;
+}
+
+.beam path,.after-slits path{
+  fill:none;
+  stroke:#5d8eaf;
+  stroke-width:3;
+  stroke-linecap:round;
+  opacity:.65;
+}
+
+.after-slits path{
+  stroke-dasharray:4 7;
+  opacity:.38;
+}
+
+.source{
+  fill:#ef9a47;
+  filter:url(#glow);
+  animation:pulse 1.4s ease-in-out infinite;
+}
+
+.barrier rect{
+  fill:#4f6981;
+  stroke:#334a60;
+  stroke-width:2;
+}
+
+.screen{
+  fill:#d9e5ee;
+  stroke:#718da3;
+  stroke-width:2;
+}
+
+.interference,.two-bands,.detectors,.record-mark,.eraser-mark,.time-mark{
+  opacity:0;
+  transition:opacity .45s;
+}
+
+.interference ellipse{fill:#308dcc}
+.two-bands ellipse{fill:#347fad;opacity:.78}
+
+.detectors circle{
+  fill:#fffdfb;
+  stroke:#e58d46;
+  stroke-width:4;
+}
+
+.detectors circle:nth-child(n+3){
+  fill:#e58d46;
+  stroke:none;
+}
+
+.record-mark path,.eraser-mark path,.time-mark path{
+  fill:none;
+  stroke:#c7657a;
+  stroke-width:5;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.record-mark path{stroke-dasharray:7 8}
+.record-mark circle{fill:#c7657a}
+.eraser-mark path{opacity:.75}
+.time-mark path{stroke:#7b6dac;stroke-dasharray:7 6}
+
+.scene[data-visual="interference"] .interference,
+.scene[data-visual="amplitude"] .interference,
+.scene[data-visual="phase"] .interference,
+.scene[data-visual="eraser"] .interference,
+.scene[data-visual="time"] .interference,
+.scene[data-visual="complete"] .interference,
+.scene[data-visual="partial"] .interference,
+.scene[data-visual="observed"] .two-bands,
+.scene[data-visual="entangled"] .two-bands,
+.scene[data-visual="recorded"] .two-bands,
+.scene[data-visual="interaction"] .two-bands,
+.scene[data-visual="density"] .two-bands,
+.scene[data-visual="partial"] .two-bands,
+.scene[data-visual="observed"] .detectors,
+.scene[data-visual="entangled"] .detectors,
+.scene[data-visual="recorded"] .detectors,
+.scene[data-visual="interaction"] .detectors,
+.scene[data-visual="partial"] .detectors,
+.scene[data-visual="density"] .detectors,
+.scene[data-visual="eraser"] .detectors,
+.scene[data-visual="time"] .detectors,
+.scene[data-visual="complete"] .detectors,
+.scene[data-visual="recorded"] .record-mark,
+.scene[data-visual="interaction"] .record-mark,
+.scene[data-visual="density"] .record-mark,
+.scene[data-visual="eraser"] .eraser-mark,
+.scene[data-visual="time"] .eraser-mark,
+.scene[data-visual="time"] .time-mark,
+.scene[data-visual="complete"] .time-mark{
+  opacity:1;
+}
+
+.scene[data-visual="partial"] .interference,
+.scene[data-visual="partial"] .two-bands{
+  opacity:.55;
+}
+
+.scene[data-visual="phase"] .after-slits path:nth-child(odd){stroke:#9b64ac}
+
+.scene.correct{
+  border-color:#93bca8;
+  background:linear-gradient(#f7fcf8,#edf8f1);
+}
+
+.scene.wrong{
+  border-color:#d6a1aa;
+  background:linear-gradient(#fffafa,#faeff1);
 }
 
 .scene-caption{
   position:absolute;
+  z-index:3;
   right:12px;
-  bottom:13px;
+  bottom:10px;
   left:12px;
-  font-size:16px;
-  line-height:1.4;
+  font-size:17px;
+  line-height:1.3;
   text-align:center;
 }
 
-.scene.happy .characters{animation:bob .4s ease-in-out 2}
-.scene.fear{background:#dce0eb}
-.scene.fear .characters{animation:shake .13s linear 5}
-
 .dialogue{
   position:relative;
-  min-height:108px;
-  margin:14px 0 10px;
+  min-height:150px;
+  margin:15px 0 12px;
   padding:0 8px;
 }
 
-.speaker{
-  color:#6086a5;
-  font-size:16px;
-  line-height:1.2;
-  font-weight:bold;
-}
-
 #line{
-  margin:5px 0 0;
+  margin:0;
   font-size:21px;
-  line-height:1.6;
+  line-height:1.65;
   white-space:pre-line;
 }
 
 #skip{
   position:absolute;
   right:0;
-  bottom:-7px;
+  bottom:-8px;
   padding:8px;
   border:0;
   background:none;
@@ -176,27 +301,34 @@ h1 span{color:#427db2}
 
 #choices{
   display:grid;
-  gap:10px;
+  gap:11px;
 }
 
 .choice{
   width:100%;
-  padding:10px 14px;
+  padding:11px 14px;
   border:1.5px solid #94abc1;
   border-bottom-width:4px;
   border-radius:14px;
   background:white;
   color:#314e6b;
-  font-size:21px;
-  line-height:1.35;
+  font-size:20px;
+  line-height:1.42;
   text-align:left;
   transition:transform .12s,background .12s;
 }
 
+.choice span{display:block}
+
 .choice small{
   display:block;
   color:#657f98;
-  font-size:19px;
+  font-size:18px;
+}
+
+.choice .choice-lead{
+  margin-bottom:2px;
+  color:#8b6882;
 }
 
 .choice:active{
@@ -218,55 +350,45 @@ h1 span{color:#427db2}
 }
 
 footer{
-  margin-top:8px;
-  padding-top:5px;
+  margin-top:10px;
+  padding-top:6px;
   border-top:1px dashed #dce3ea;
 }
 
 .ending-title{
-  margin:3px 0 6px;
+  margin:0 0 9px;
+  color:#476b89;
   font-size:30px;
-  line-height:1.15;
   font-weight:900;
+  line-height:1.2;
 }
 
 .ending .dialogue{min-height:0}
-.ending .scene{height:170px}
-.ending .characters{bottom:28px}
-.ending .scene-caption{bottom:8px}
-.ending #line{font-size:20px;line-height:1.55}
-.ending .dialogue{margin-top:8px}
 
-@keyframes bob{50%{transform:translateY(-8px)}}
-@keyframes shake{50%{transform:translateX(1%)}}
+@keyframes pulse{
+  50%{opacity:.45;transform:scale(.8);transform-origin:32px 105px}
+}
 
-@media(max-height:750px){
-  #game{padding-top:8px}
-  .heading{margin-top:4px}
-  h1{font-size:39px}
-  #progress{margin:6px 0}
-  .scene{height:210px}
-  .ending .scene{height:155px}
-  .dialogue{min-height:96px;margin-top:9px}
+@media(max-width:390px){
+  #game{padding-right:16px;padding-left:16px}
+  h1{font-size:40px}
+  .badge{font-size:13px}
+  .scene{height:300px}
+  .lesson-characters{width:108px;height:97px}
+  .experiment{top:91px;height:168px}
   #line{font-size:20px}
-  .choice{padding:7px 12px;font-size:20px}
-  .choice small{font-size:18px}
-  footer{margin-top:6px}
+  .choice{font-size:19px}
+  .choice small{font-size:17px}
 }
 
 @media(max-height:680px){
-  #game{padding-right:16px;padding-bottom:max(10px,env(safe-area-inset-bottom));padding-left:16px}
-  .heading{margin-bottom:2px}
-  #progress{margin:2px 0}
-  .scene{height:185px}
-  .ending .scene{height:115px}
-  .ending .dialogue{margin-top:4px}
-  .dialogue{min-height:88px;margin-bottom:8px}
-  #line{font-size:19px}
-  .choice{padding:6px 11px;font-size:19px}
-  .choice small{font-size:17px}
-  .ending-title{font-size:27px}
-  .ending #line{font-size:18px;line-height:1.5}
+  #game{padding-top:8px;padding-bottom:max(10px,env(safe-area-inset-bottom))}
+  .heading{margin-top:3px}
+  #progress{margin:7px 0}
+  .scene{height:280px}
+  .lesson-characters{width:96px;height:86px}
+  .experiment{top:80px;height:158px}
+  .dialogue{margin-top:11px}
 }
 
 @media(prefers-reduced-motion:reduce){
