@@ -429,6 +429,23 @@ footer{
   border-top:1px dashed #dce3ea;
 }
 
+.footer-actions{
+  display:flex;
+  align-items:center;
+  gap:2px;
+}
+
+footer .footer-actions button{
+  padding-inline:4px;
+  font-size:16px;
+  white-space:nowrap;
+}
+
+footer button:disabled{
+  opacity:.35;
+  cursor:default;
+}
+
 .ending-title{
   margin:0 0 9px;
   color:#476b89;

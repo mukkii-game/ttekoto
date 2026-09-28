@@ -109,6 +109,7 @@ function render(){
   $('scene').dataset.visual=scene.visual;
   $('step-label').textContent=finished?'おさらい':'なぞ '+RIDDLE_NAMES[step];
   $('caption').textContent=scene.caption;
+  $('back').disabled=step===0;
   $('choices').replaceChildren();
   document.querySelector('.ending-title')?.remove();
 
@@ -189,6 +190,11 @@ $('skip').onclick=finishText;
 $('restart').onclick=()=>{
   if(locked)return;
   step=0;
+  render();
+};
+$('back').onclick=()=>{
+  if(locked||step===0)return;
+  step--;
   render();
 };
 document.addEventListener('visibilitychange',()=>{
