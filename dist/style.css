@@ -386,6 +386,50 @@ h1 span{color:#427db2}
 .term-card .guide-note{font-size:15px}
 .term-card .guide-result{fill:#9c5d89;font-size:17px}
 
+.phase-cycle-diagram{
+  display:grid;
+  grid-template-columns:repeat(9,auto);
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  margin:14px 0 8px;
+}
+
+.phase-cycle-diagram b{
+  min-width:42px;
+  padding:6px 5px;
+  border-radius:999px;
+  background:#e1eef7;
+  color:#486f90;
+  font-size:16px;
+}
+
+.phase-cycle-diagram b:nth-of-type(2){transform:translateY(-7px)}
+.phase-cycle-diagram b:nth-of-type(4){transform:translateY(7px)}
+.phase-cycle-diagram i{color:#a5648b;font-size:18px}
+
+.complex-axis{
+  fill:none;
+  stroke:#a9b6c2;
+  stroke-width:2;
+}
+
+.complex-guide{
+  fill:none;
+  stroke:#4f86ae;
+  stroke-width:6;
+  stroke-linecap:round;
+}
+
+.complex-card marker path{fill:#4f86ae}
+
+.complex-components{
+  fill:none;
+  stroke:#c789a9;
+  stroke-width:2;
+  stroke-dasharray:5 4;
+}
+
 .term-card i,
 .term-card em{
   font-style:normal;
@@ -561,6 +605,8 @@ h1 span{color:#427db2}
   white-space:nowrap;
 }
 
+.scene[data-visual="phase-cycle"] .experiment,
+.scene[data-visual="complex"] .experiment,
 .scene[data-visual="amplitude"] .experiment,
 .scene[data-visual="phase"] .experiment,
 .scene[data-visual="entanglement-guide"] .experiment,
@@ -577,6 +623,8 @@ h1 span{color:#427db2}
   opacity:.09;
 }
 
+.scene[data-visual="phase-cycle"] .term-guide,
+.scene[data-visual="complex"] .term-guide,
 .scene[data-visual="amplitude"] .term-guide,
 .scene[data-visual="phase"] .term-guide,
 .scene[data-visual="entanglement-guide"] .term-guide,
@@ -590,6 +638,8 @@ h1 span{color:#427db2}
 .scene[data-visual="time"] .term-guide,
 .scene[data-visual="correlation"] .term-guide,
 .scene[data-visual="observation"] .term-guide,
+.scene[data-visual="phase-cycle"] .phase-cycle-card,
+.scene[data-visual="complex"] .complex-card,
 .scene[data-visual="amplitude"] .amplitude-card,
 .scene[data-visual="phase"] .phase-card,
 .scene[data-visual="entanglement-guide"] .entanglement-card,

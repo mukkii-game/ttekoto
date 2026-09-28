@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#eff5fc">
   <title>…ってコト⁉︎</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style.css?v=20260929d">
 </head>
 <body>
   <main id="game">
@@ -145,6 +145,31 @@
       </div>
 
       <div class="term-guide">
+        <div class="term-card phase-cycle-card" role="img" aria-label="位相は、波が繰り返す一周のどこにいるかを表す。同じ高さでも、上りと下りは違う位相">
+          <strong>位相</strong>
+          <span>波の一周の、いまどこ？</span>
+          <div class="phase-cycle-diagram">
+            <b>上り</b><i>→</i><b>山</b><i>→</i><b>下り</b><i>→</i><b>谷</b><i>↻</i>
+          </div>
+          <small>同じ高さでも「上り」と「下り」は別</small>
+        </div>
+
+        <div class="term-card complex-card" role="img" aria-label="複素数は、横の数と縦の数という二つの普通の数を一組にして、長さと向きのある一本の矢印を表す">
+          <strong>複素数</strong>
+          <span>二つの数を、一組の矢印にする</span>
+          <svg viewBox="0 0 360 100" aria-hidden="true">
+            <defs>
+              <marker id="arrow-complex" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z"></path></marker>
+            </defs>
+            <path class="complex-axis" d="M45 76 H316 M92 91 V8"></path>
+            <path class="complex-guide" d="M92 76 L230 25" marker-end="url(#arrow-complex)"></path>
+            <path class="complex-components" d="M92 25 H230 M230 25 V76"></path>
+            <text x="238" y="90">横の数</text>
+            <text x="12" y="18">縦の数</text>
+            <text class="guide-result" x="240" y="30">一本の矢印</text>
+          </svg>
+        </div>
+
         <div class="term-card amplitude-card" role="img" aria-label="確率振幅は長さと向きのある矢印。二つの矢印を足してから確率に直す">
           <strong>確率振幅</strong>
           <span>長さと向きのある矢印</span>
@@ -264,6 +289,6 @@
     </footer>
   </main>
 
-  <script type="module" src="./game.js"></script>
+  <script type="module" src="./game.js?v=20260929d"></script>
 </body>
 </html>
