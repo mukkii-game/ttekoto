@@ -305,6 +305,75 @@ h1 span{color:#427db2}
 
 .scene[data-visual="phase"] .after-slits path:nth-child(odd){stroke:#9b64ac}
 
+.term-guide{
+  position:absolute;
+  z-index:2;
+  top:114px;
+  right:12px;
+  left:12px;
+  display:none;
+}
+
+.term-card{
+  display:none;
+  padding:10px 12px 4px;
+  border:1px solid #c7d7e5;
+  border-radius:18px;
+  background:#fffdfbea;
+  box-shadow:0 5px 16px #55728f18;
+  text-align:center;
+}
+
+.term-card strong,
+.term-card>span{
+  display:block;
+}
+
+.term-card strong{
+  color:#486e91;
+  font-size:21px;
+  line-height:1.15;
+}
+
+.term-card>span{
+  margin-top:2px;
+  color:#6c7690;
+  font-size:16px;
+  line-height:1.2;
+}
+
+.term-card svg{
+  display:block;
+  width:100%;
+  height:90px;
+}
+
+.guide-arrow{
+  fill:none;
+  stroke:#4f86ae;
+  stroke-width:5;
+  stroke-linecap:round;
+}
+
+.guide-arrow.second-arrow{stroke:#b06c98}
+.guide-arrow.strong-arrow{stroke-width:8}
+.term-card marker path{fill:#4f86ae}
+.term-card text{fill:#6c7690;font-family:'Chika',sans-serif;font-size:16px}
+.term-card .guide-note{font-size:15px}
+.term-card .guide-result{fill:#9c5d89;font-size:17px}
+
+.scene[data-visual="amplitude"] .experiment,
+.scene[data-visual="phase"] .experiment{
+  opacity:.09;
+}
+
+.scene[data-visual="amplitude"] .term-guide,
+.scene[data-visual="phase"] .term-guide,
+.scene[data-visual="amplitude"] .amplitude-card,
+.scene[data-visual="phase"] .phase-card{
+  display:block;
+}
+
 .scene.correct{
   border-color:#93bca8;
   background:linear-gradient(#f7fcf8,#edf8f1);
