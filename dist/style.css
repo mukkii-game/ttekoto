@@ -183,7 +183,7 @@ h1 span{color:#427db2}
   stroke-width:2;
 }
 
-.interference,.two-bands,.detectors,.record-mark,.eraser-mark,.time-mark,.possibility-cloud,.single-experiment{
+.interference,.two-bands,.detectors,.record-mark,.eraser-mark,.time-mark,.possibility-cloud,.single-experiment,.pathless-wave,.source-spread{
   opacity:0;
   transition:opacity .45s;
 }
@@ -248,17 +248,41 @@ h1 span{color:#427db2}
 
 .single-band{fill:#347fad;opacity:.72;filter:url(#glow)}
 
+.probability-cloud{
+  fill:#6ea6cc;
+  opacity:.26;
+}
+
+.broad-cloud{opacity:.18}
+.cloud-source{fill:#ef9a47;filter:url(#glow)}
+
+.absorbed-marks path{
+  fill:none;
+  stroke:#c7657a;
+  stroke-width:4;
+  stroke-linecap:round;
+}
+
 .scene[data-visual="possibility"] .beam,
 .scene[data-visual="possibility"] .barrier,
 .scene[data-visual="possibility"] .after-slits,
-.scene[data-visual="possibility"] .screen{
+.scene[data-visual="possibility"] .screen,
+.scene[data-visual="pathless"] .beam,
+.scene[data-visual="pathless"] .after-slits,
+.scene[data-visual="spread"] .beam,
+.scene[data-visual="spread"] .after-slits{
   opacity:0;
 }
 
 .scene[data-visual="possibility"] .possibility-cloud,
-.scene[data-visual="single"] .single-experiment{
+.scene[data-visual="single"] .single-experiment,
+.scene[data-visual="pathless"] .single-experiment,
+.scene[data-visual="pathless"] .pathless-wave,
+.scene[data-visual="spread"] .source-spread{
   opacity:1;
 }
+
+.scene[data-visual="pathless"] .single-path{opacity:0}
 
 .scene[data-visual="single"] .beam path:last-of-type,
 .scene[data-visual="single"] .after-slits{

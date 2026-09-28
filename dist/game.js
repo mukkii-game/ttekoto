@@ -1,7 +1,7 @@
 import {lessons,ending} from './story.js';
 
 const $=id=>document.getElementById(id);
-const RIDDLE_NAMES=['一','二','三','四','五','六','七','八','九','十','十一','十二'];
+const RIDDLE_NAMES=['一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四'];
 let step=0,sound=true,audioUnlocked=false,ctx,timer,afterWrite=null,full='',typing=false,locked=false,waitingForAdvance=false;
 
 function tone(freq=600,duration=.045,delay=0,type='sine',volume=.035,endFreq=freq*.86){
@@ -126,7 +126,7 @@ function render(){
     lessons[step].choices.forEach((text,index)=>{
       $('choices').append(questionButton(text,index));
     });
-    $('collection').textContent='謎 '+RIDDLE_NAMES[step]+' / 十二';
+    $('collection').textContent='謎 '+RIDDLE_NAMES[step]+' / '+RIDDLE_NAMES[lessons.length-1];
   }
 
   write(scene.line);
