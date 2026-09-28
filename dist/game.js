@@ -2,7 +2,8 @@ import {lessons,ending} from './story.js';
 
 const $=id=>document.getElementById(id);
 const STEP_NAMES=['ひとつめ','ふたつめ','みっつめ','よっつめ','いつつめ','むっつめ','ななつめ','やっつめ','ここのつめ','とおめ'];
-let step=0,sound=true,audioUnlocked=false,ctx,timer,full='',typing=false,locked=false;
+const RIDDLE_NAMES=['いち','に','さん','よん','ご','ろく','なな','はち','きゅう','じゅう'];
+let step=0,sound=true,audioUnlocked=false,ctx,timer,advanceTimer,afterWrite=null,full='',typing=false,locked=false;
 
 function tone(freq=600,duration=.045,delay=0,type='sine',volume=.035,endFreq=freq*.86){
   if(!sound||!audioUnlocked)return;
@@ -46,15 +47,19 @@ function choiceSound(){
 }
 
 function finishText(){
+  const callback=typing?afterWrite:null;
   clearInterval(timer);
   $('line').textContent=full;
   typing=false;
+  afterWrite=null;
   $('skip').hidden=true;
+  callback?.();
 }
 
-function write(text){
+function write(text,onDone=null){
   clearInterval(timer);
   full=text;
+  afterWrite=onDone;
   $('line').textContent='';
   typing=true;
   $('skip').hidden=false;
@@ -96,12 +101,14 @@ function renderProgress(current){
 }
 
 function render(){
+  clearTimeout(advanceTimer);
   locked=false;
   const finished=step>=lessons.length;
   const scene=finished?ending:lessons[step];
   $('game').classList.toggle('ending',finished);
   $('scene').className='scene';
   $('scene').dataset.visual=scene.visual;
+  $('step-label').textContent=finished?'おさらい':'なぞ '+RIDDLE_NAMES[step];
   $('caption').textContent=scene.caption;
   $('choices').replaceChildren();
   document.querySelector('.ending-title')?.remove();
@@ -136,11 +143,14 @@ function showWrong(lesson,choice){
 
 function showCorrect(lesson){
   $('scene').classList.add('correct');
-  write('うん、せいかい。\n\n'+lesson.explain);
   const last=step===lessons.length-1;
-  $('choices').replaceChildren(
-    button(last?'さいごの おさらいへ':'つぎの ふしぎへ',()=>{step++;render()},true)
-  );
+  const notice=document.createElement('div');
+  notice.className='auto-next';
+  notice.textContent=last?'さいごの おさらいへ…':'つぎの なぞへ…';
+  $('choices').replaceChildren(notice);
+  write('うん、せいかい。\n\n'+lesson.explain,()=>{
+    advanceTimer=setTimeout(()=>{step++;render()},1600);
+  });
   answerSound(true);
 }
 
