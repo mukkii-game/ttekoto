@@ -183,7 +183,7 @@ h1 span{color:#427db2}
   stroke-width:2;
 }
 
-.interference,.two-bands,.detectors,.record-mark,.eraser-mark,.time-mark{
+.interference,.two-bands,.detectors,.record-mark,.eraser-mark,.time-mark,.possibility-cloud,.single-experiment{
   opacity:0;
   transition:opacity .45s;
 }
@@ -215,7 +215,58 @@ h1 span{color:#427db2}
 .eraser-mark path{opacity:.75}
 .time-mark path{stroke:#7b6dac;stroke-dasharray:7 6}
 
+.possibility-cloud .thought-line{
+  fill:none;
+  stroke:#a792b7;
+  stroke-width:3;
+  stroke-dasharray:5 7;
+}
+
+.possibility-cloud .thought-dot{fill:#a792b7}
+
+.possibility-cloud .dish>ellipse{
+  fill:#fffdfb;
+  stroke:#7895aa;
+  stroke-width:3;
+}
+
+.possibility-cloud .curry path{fill:#efb05b;stroke:#d98743;stroke-width:2}
+.possibility-cloud .curry circle{fill:#fff3cf}
+.possibility-cloud .rice path{fill:#fffdf4;stroke:#718ca1;stroke-width:3;stroke-linejoin:round}
+.possibility-cloud .rice rect{fill:#526b67}
+.possibility-cloud .bowl path:first-of-type{fill:#91c6dc;stroke:#608aa1;stroke-width:3}
+.possibility-cloud .bowl path:last-of-type{fill:none;stroke:#e89c68;stroke-width:4;stroke-linecap:round}
+
+.single-cover{fill:#4f6981;stroke:#334a60;stroke-width:2}
+
+.single-path{
+  fill:none;
+  stroke:#5d8eaf;
+  stroke-width:4;
+  stroke-dasharray:5 7;
+}
+
+.single-band{fill:#347fad;opacity:.72;filter:url(#glow)}
+
+.scene[data-visual="possibility"] .beam,
+.scene[data-visual="possibility"] .barrier,
+.scene[data-visual="possibility"] .after-slits,
+.scene[data-visual="possibility"] .screen{
+  opacity:0;
+}
+
+.scene[data-visual="possibility"] .possibility-cloud,
+.scene[data-visual="single"] .single-experiment{
+  opacity:1;
+}
+
+.scene[data-visual="single"] .beam path:last-of-type,
+.scene[data-visual="single"] .after-slits{
+  opacity:0;
+}
+
 .scene[data-visual="interference"] .interference,
+.scene[data-visual="wave"] .interference,
 .scene[data-visual="amplitude"] .interference,
 .scene[data-visual="phase"] .interference,
 .scene[data-visual="eraser"] .interference,

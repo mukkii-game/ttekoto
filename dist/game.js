@@ -1,8 +1,7 @@
 import {lessons,ending} from './story.js';
 
 const $=id=>document.getElementById(id);
-const STEP_NAMES=['ひとつめ','ふたつめ','みっつめ','よっつめ','いつつめ','むっつめ','ななつめ','やっつめ','ここのつめ','とおめ'];
-const RIDDLE_NAMES=['いち','に','さん','よん','ご','ろく','なな','はち','きゅう','じゅう'];
+const RIDDLE_NAMES=['いち','に','さん','よん','ご','ろく','なな','はち','きゅう','じゅう','じゅういち','じゅうに'];
 let step=0,sound=true,audioUnlocked=false,ctx,timer,advanceTimer,afterWrite=null,full='',typing=false,locked=false;
 
 function tone(freq=600,duration=.045,delay=0,type='sine',volume=.035,endFreq=freq*.86){
@@ -126,7 +125,7 @@ function render(){
     lessons[step].choices.forEach((text,index)=>{
       $('choices').append(questionButton(text,index));
     });
-    $('collection').textContent='もんだい '+STEP_NAMES[step]+' / とお';
+    $('collection').textContent='なぞ '+RIDDLE_NAMES[step]+' / じゅうに';
   }
 
   write(scene.line);
