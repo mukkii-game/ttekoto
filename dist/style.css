@@ -711,6 +711,65 @@ h1 span{color:#427db2}
   background:linear-gradient(#fffafa,#faeff1);
 }
 
+.level-reward-scene{
+  border-color:#e2b858;
+  background:
+    radial-gradient(circle at 18% 22%,#fff4a8 0 4px,transparent 5px),
+    radial-gradient(circle at 80% 28%,#fff4a8 0 6px,transparent 7px),
+    radial-gradient(circle at 28% 72%,#ffffffa8 0 5px,transparent 6px),
+    radial-gradient(circle at 74% 76%,#ffffffa8 0 4px,transparent 5px),
+    linear-gradient(145deg,#fff8d8,#dff5ed 58%,#e7efff);
+}
+
+.level-reward-scene>.lesson-characters,
+.level-reward-scene>.experiment,
+.level-reward-scene>.term-guide{
+  display:none;
+}
+
+.level-reward-scene:before{
+  content:'★';
+  position:absolute;
+  top:34px;
+  left:50%;
+  width:142px;
+  height:142px;
+  border:5px solid #fff8dc;
+  border-radius:50%;
+  background:#f4c85a;
+  box-shadow:0 10px 0 #dcae3d,0 16px 30px #9c7a2533;
+  color:#fffdf0;
+  font-family:Arial,sans-serif;
+  font-size:92px;
+  line-height:142px;
+  text-align:center;
+  text-shadow:0 4px 0 #d6a536;
+  transform:translateX(-50%) rotate(-4deg);
+  animation:rewardPop .55s cubic-bezier(.2,1.5,.5,1) both;
+}
+
+.level-reward-scene:after{
+  content:'LEVEL ' attr(data-level);
+  position:absolute;
+  top:201px;
+  left:50%;
+  padding:7px 19px;
+  border:2px solid #c89e3e;
+  border-radius:999px;
+  background:#fffdf0;
+  color:#8a681e;
+  font-family:Arial,sans-serif;
+  font-size:21px;
+  font-weight:800;
+  letter-spacing:2px;
+  transform:translateX(-50%) rotate(1deg);
+}
+
+.level-up .reward-title{
+  color:#9a7224;
+  text-align:center;
+}
+
 .scene-caption{
   position:absolute;
   z-index:3;
@@ -878,6 +937,10 @@ footer button:disabled{
 
 @keyframes nextPulse{
   to{opacity:.45}
+}
+
+@keyframes rewardPop{
+  from{opacity:0;transform:translateX(-50%) rotate(-18deg) scale(.35)}
 }
 
 @media(max-width:390px){

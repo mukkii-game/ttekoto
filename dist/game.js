@@ -1,8 +1,15 @@
-import {lessons,ending} from './story.js?v=20260929k';
+import {lessons,levelMilestones,ending} from './story.js?v=20260929m';
 
 const $=id=>document.getElementById(id);
-const RIDDLE_NAMES=['一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四','十五','十六','十七','十八','十九','二十','二十一','二十二','二十三'];
-let step=0,sound=true,audioUnlocked=false,ctx,timer,afterWrite=null,full='',typing=false,locked=false,waitingForAdvance=false;
+const DIGITS=['','一','二','三','四','五','六','七','八','九'];
+let step=0,sound=true,audioUnlocked=false,ctx,timer,afterWrite=null,full='',typing=false,locked=false,waitingForAdvance=false,activeMilestone=null;
+
+function numberName(value){
+  if(value<10)return DIGITS[value];
+  const tens=Math.floor(value/10);
+  const ones=value%10;
+  return (tens===1?'':DIGITS[tens])+'十'+DIGITS[ones];
+}
 
 function tone(freq=600,duration=.045,delay=0,type='sine',volume=.035,endFreq=freq*.86){
   if(!sound||!audioUnlocked)return;
@@ -43,6 +50,12 @@ function answerSound(correct){
 function choiceSound(){
   tone(620,.06,0,'triangle',.035,760);
   tone(930,.1,.055,'sine',.026,1050);
+}
+
+function rewardSound(){
+  tone(523,.13,0,'sine',.035,659);
+  tone(659,.13,.12,'sine',.032,784);
+  tone(784,.24,.24,'sine',.035,1047);
 }
 
 function finishText(){
@@ -106,9 +119,11 @@ function render(){
   const finished=step>=lessons.length;
   const scene=finished?ending:lessons[step];
   $('game').classList.toggle('ending',finished);
+  $('game').classList.remove('level-up');
   $('scene').className='scene';
   $('scene').dataset.visual=scene.visual;
-  $('step-label').textContent=finished?'おさらい':'謎 '+RIDDLE_NAMES[step];
+  delete $('scene').dataset.level;
+  $('step-label').textContent=finished?'レベル 3':'謎 '+numberName(step+1);
   $('caption').textContent=scene.caption;
   $('back').disabled=step===0;
   $('choices').replaceChildren();
@@ -129,12 +144,53 @@ function render(){
     lessons[step].choices.forEach((text,index)=>{
       $('choices').append(questionButton(text,index));
     });
-    $('collection').textContent='謎 '+RIDDLE_NAMES[step]+' / '+RIDDLE_NAMES[lessons.length-1];
+    $('collection').textContent='謎 '+numberName(step+1)+' / '+numberName(lessons.length);
     $('collection').disabled=true;
     $('collection').removeAttribute('aria-label');
   }
 
   write(scene.line);
+}
+
+function renderMilestone(milestone){
+  window.scrollTo(0,0);
+  locked=false;
+  waitingForAdvance=false;
+  activeMilestone=milestone;
+  $('game').classList.remove('ending');
+  $('game').classList.add('level-up');
+  $('scene').className='scene level-reward-scene';
+  $('scene').dataset.visual='level-up';
+  $('scene').dataset.level=String(milestone.level);
+  $('step-label').textContent='レベル '+milestone.level;
+  $('caption').textContent=milestone.caption;
+  $('back').disabled=false;
+  $('choices').replaceChildren();
+  document.querySelector('.ending-title')?.remove();
+  renderProgress(step-1);
+
+  const heading=document.createElement('h2');
+  heading.className='ending-title reward-title';
+  heading.textContent=milestone.title;
+  $('line').before(heading);
+  const next=button(milestone.button,()=>{
+    activeMilestone=null;
+    render();
+  },true);
+  next.disabled=true;
+  $('choices').append(next);
+  $('collection').textContent='全 3 レベル中 '+milestone.level+' 達成';
+  $('collection').disabled=true;
+  $('collection').removeAttribute('aria-label');
+  write(milestone.line,()=>{next.disabled=false});
+  rewardSound();
+}
+
+function advance(){
+  step++;
+  const milestone=levelMilestones.find(item=>item.after===step);
+  if(milestone)renderMilestone(milestone);
+  else render();
 }
 
 function showWrong(lesson,choice){
@@ -197,10 +253,18 @@ $('skip').onclick=finishText;
 $('restart').onclick=()=>{
   if(locked)return;
   step=0;
+  activeMilestone=null;
   render();
 };
 $('back').onclick=()=>{
-  if(locked||step===0)return;
+  if(locked)return;
+  if(activeMilestone){
+    activeMilestone=null;
+    step--;
+    render();
+    return;
+  }
+  if(step===0)return;
   step--;
   render();
 };
@@ -212,8 +276,7 @@ $('collection').onclick=()=>{
 document.addEventListener('click',event=>{
   if(!waitingForAdvance||event.target.closest?.('button'))return;
   waitingForAdvance=false;
-  step++;
-  render();
+  advance();
 });
 document.addEventListener('visibilitychange',()=>{
   if(document.hidden){
